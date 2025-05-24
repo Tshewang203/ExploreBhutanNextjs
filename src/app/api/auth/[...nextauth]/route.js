@@ -11,7 +11,7 @@ const ADMIN_PASSWORD_HASH =
   process.env.ADMIN_PASSWORD_HASH ||
   '$2b$10$sHscwNjG0kDUwQE06eUPIOt59HnOEu3Ae4Dd7cOYrEHRZ6gnJzxeW';
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -103,5 +103,4 @@ export const authOptions = {
 
 // Export HTTP method handlers for App Router
 const handler = NextAuth(authOptions);
-export const GET = handler;
-export const POST = handler;
+export { handler as GET, handler as POST };
