@@ -1,0 +1,14 @@
+{
+  "/api/bookings/route": "app/api/bookings/route.js",
+  "/contact/page": "app/contact/page.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/page": "app/page.js",
+  "/registration/page": "app/registration/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/bookings/[id]/route": "app/api/bookings/[id]/route.js",
+  "/api/contact/[id]/route": "app/api/contact/[id]/route.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/dashboard/page": "app/admin/dashboard/page.js",
+  "/admin/dashboard/bookings/page": "app/admin/dashboard/bookings/page.js",
+  "/admin/dashboard/contacts/page": "app/admin/dashboard/contacts/page.js"
+}
