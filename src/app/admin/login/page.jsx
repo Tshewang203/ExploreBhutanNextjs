@@ -72,7 +72,7 @@ export default function AdminLogin() {
             </div>
           </div>
           <h1 className="text-3xl font-bold font-['Cinzel'] text-[var(--dzong-blue)] mb-2">
-            Admin Login
+            Login
           </h1>
           <p className="text-gray-600 font-['Playfair_Display']">
             Welcome back! Please enter your credentials.
