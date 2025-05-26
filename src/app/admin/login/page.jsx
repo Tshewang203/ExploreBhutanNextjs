@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
-    username: 'admin',
+    username: 'admin@gmail.com',
     password: 'adminBhutan'
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ export default function AdminLogin() {
   setIsLoading(true);
 
   // Redirect non-admin users to home page without validating credentials
-  if (credentials.username !== 'admin') {
+  if (credentials.username !== 'admin@gmail.com') {
     router.push('/user');
     return;
   }
@@ -85,7 +85,7 @@ export default function AdminLogin() {
               htmlFor="username" 
               className="block text-sm font-medium text-gray-700 mb-1 font-['Playfair_Display']"
             >
-              Username
+              email
             </label>
             <input
               type="text"

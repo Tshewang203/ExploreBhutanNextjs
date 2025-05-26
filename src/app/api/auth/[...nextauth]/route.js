@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import Registration from '@/models/Registration';
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin@gmail.com';
 const ADMIN_PASSWORD_HASH =
   process.env.ADMIN_PASSWORD_HASH ||
   '$2b$10$sHscwNjG0kDUwQE06eUPIOt59HnOEu3Ae4Dd7cOYrEHRZ6gnJzxeW';
@@ -89,7 +89,7 @@ const authOptions = {
 
     async redirect({ url, baseUrl, token }) {
       if (token?.role === 'admin') return `${baseUrl}/admin`;
-      return `${baseUrl}/home`;
+      return baseUrl;
     },
   },
 
@@ -104,3 +104,4 @@ const authOptions = {
 // Export HTTP method handlers for App Router
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+export { authOptions }; 

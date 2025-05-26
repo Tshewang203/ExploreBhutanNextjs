@@ -6,11 +6,6 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/destinations', label: 'Destinations' },
-  { href: '/travel-tips', label: 'Travel Tips' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/quiz', label: 'Quiz' },
-  { href: '/contact', label: 'Contact' }
 ];
 
 export default function Navigation() {
@@ -40,7 +35,7 @@ export default function Navigation() {
             Explore Bhutan
           </Link>
 
-          <div className="hidden md:flex space-x-12">
+          <div className="hidden md:flex space-x-12 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -52,6 +47,13 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            {/* Sign In Button (Desktop) */}
+            <Link
+              href="/admin/login"
+              className="ml-6 px-5 py-2 bg-white text-[#2B3F55] rounded-lg font-semibold hover:bg-[var(--rice-white)] transition-colors"
+            >
+              Sign In
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -84,6 +86,14 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            {/* Sign In Button (Mobile) */}
+            <Link
+              href="/admin/login"
+              className="block w-full px-6 py-4 text-xl bg-white text-[#2B3F55] rounded-lg font-semibold hover:bg-[var(--rice-white)] transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sign In
+            </Link>
           </div>
         </div>
       </div>

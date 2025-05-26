@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react'; // Add this import
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -41,7 +42,7 @@ export default function Navigation() {
             Explore Bhutan
           </Link>
 
-          <div className="hidden md:flex space-x-12">
+          <div className="hidden md:flex space-x-12 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -53,6 +54,13 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            {/* Sign Out Button (Desktop) */}
+            <button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className="ml-6 px-5 py-2 bg-white text-[#2B3F55] rounded-lg font-semibold hover:bg-[var(--rice-white)] transition-colors"
+            >
+              Sign Out
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -85,6 +93,16 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+            {/* Sign Out Button (Mobile) */}
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                signOut({ callbackUrl: '/' });
+              }}
+              className="block w-full px-6 py-4 text-xl bg-white text-[#2B3F55] rounded-lg font-semibold hover:bg-[var(--rice-white)] transition-colors"
+            >
+              Sign Out
+            </button>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import Navigation from './Navigation';
-import Footer from './UserFooter';
+import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 
 export default function Layout({ children }) {

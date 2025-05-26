@@ -67,7 +67,7 @@ export default function HeroSection() {
           onClick={handleRegistration}
           className="inline-block px-8 py-4 bg-[var(--dzong-blue)] text-white rounded-lg hover:bg-[var(--river-blue)] transition-all duration-300 hover:-translate-y-1 font-['Cinzel']"
         >
-          Register to Start Your Adventure
+          Register to BOOK NOW
         </motion.button>
       </div>
 

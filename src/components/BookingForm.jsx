@@ -4,14 +4,17 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 
 export default function BookingForm({ selectedPackage }) {
+  // Add state for tour packages
+  const [tourPackages, setTourPackages] = useState([]);
+  
   // Update initial state
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    alternateEmail: '',  // New field
-    nationality: '',     // New field
-    passportNumber: '', // New field
+    alternateEmail: '',  
+    nationality: '',     
+    passportNumber: '', 
     arrivalDate: '',
     departureDate: '',
     tourPackage: '',
@@ -24,12 +27,28 @@ export default function BookingForm({ selectedPackage }) {
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [dateError, setDateError] = useState('')
 
+  // Fetch tour packages
+  useEffect(() => {
+    const fetchTourPackages = async () => {
+      try {
+        const response = await fetch('/api/tour-packages');
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+        setTourPackages(data);
+      } catch (err) {
+        toast.error('Failed to load tour packages');
+      }
+    };
+
+    fetchTourPackages();
+  }, []);
+
   // Update form when package is selected
   useEffect(() => {
     if (selectedPackage) {
       setFormData(prev => ({
         ...prev,
-        tourPackage: selectedPackage.toString()
+        tourPackage: selectedPackage
       }))
     }
   }, [selectedPackage])
@@ -139,12 +158,12 @@ export default function BookingForm({ selectedPackage }) {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data = await response.json();
       
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit booking');
+      }
+
       if (data.success) {
         setFormData({
           firstName: '',
@@ -164,11 +183,11 @@ export default function BookingForm({ selectedPackage }) {
         setSubmitSuccess(true);
         setTimeout(() => setSubmitSuccess(false), 5000);
       } else {
-        throw new Error(data.message || 'Failed to submit booking');
+        throw new Error(data.error || 'Failed to submit booking');
       }
     } catch (error) {
       console.error('Error submitting booking:', error);
-      toast.error('Failed to submit booking. Please try again.');
+      toast.error(error.message || 'Failed to submit booking. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -323,9 +342,11 @@ export default function BookingForm({ selectedPackage }) {
                 required
               >
                 <option value="">Choose a package...</option>
-                <option value="1">Cultural Heritage Tour (7 Days)</option>
-                <option value="2">Adventure Trek Package (10 Days)</option>
-                <option value="3">Festival & Wellness Journey (8 Days)</option>
+                {tourPackages.map(pkg => (
+                  <option key={pkg._id} value={pkg._id}>
+                    {pkg.title} ({pkg.duration}) - ${pkg.price}
+                  </option>
+                ))}
               </select>
             </div>
 

@@ -130,7 +130,7 @@ export default function BookingsPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="px-3 py-1 bg-[var(--rice-white)] text-[var(--dzong-blue)] rounded-full text-sm font-medium">
-                      {booking.tourPackage}
+                      {booking.tourPackage?.title || 'Package Unavailable'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -211,59 +211,36 @@ export default function BookingsPage() {
                     <i className="bi bi-credit-card text-[var(--river-blue)]"></i>
                     <strong>Passport:</strong> {selectedBooking.passportNumber}
                   </p>
-                  <p className="flex items-center gap-2">
-                    <i className="bi bi-hash text-[var(--river-blue)]"></i>
-                    <strong>Booking Reference:</strong> {selectedBooking.bookingRef}
-                  </p>
                 </div>
                 <div className="space-y-4">
                   <p className="flex items-center gap-2">
-                    <i className="bi bi-bag text-[var(--river-blue)]"></i>
-                    <strong>Package:</strong> {selectedBooking.tourPackage}
+                    <i className="bi bi-box text-[var(--river-blue)]"></i>
+                    <strong>Package:</strong> {selectedBooking.tourPackage?.title || 'Package Unavailable'}
                   </p>
                   <p className="flex items-center gap-2">
-                    <i className="bi bi-people text-[var(--river-blue)]"></i>
-                    <strong>Group Size:</strong> {selectedBooking.adults} adults, {selectedBooking.children || 0} children
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <i className="bi bi-calendar-check text-[var(--river-blue)]"></i>
+                    <i className="bi bi-calendar-event text-[var(--river-blue)]"></i>
                     <strong>Arrival:</strong> {new Date(selectedBooking.arrivalDate).toLocaleDateString()}
                   </p>
                   <p className="flex items-center gap-2">
-                    <i className="bi bi-calendar-x text-[var(--river-blue)]"></i>
+                    <i className="bi bi-calendar-event text-[var(--river-blue)]"></i>
                     <strong>Departure:</strong> {new Date(selectedBooking.departureDate).toLocaleDateString()}
                   </p>
                   <p className="flex items-center gap-2">
-                    <i className="bi bi-tag text-[var(--river-blue)]"></i>
-                    <strong>Status:</strong> 
-                    <span className={`px-2 py-1 rounded-full text-sm ${
-                      selectedBooking.status === 'confirmed' ? 'bg-green-100 text-green-700' :
-                      selectedBooking.status === 'cancelled' ? 'bg-red-100 text-red-700' :
-                      'bg-yellow-100 text-yellow-700'
-                    }`}>
-                      {selectedBooking.status.charAt(0).toUpperCase() + selectedBooking.status.slice(1)}
-                    </span>
+                    <i className="bi bi-people text-[var(--river-blue)]"></i>
+                    <strong>Group Size:</strong> {selectedBooking.adults} Adults, {selectedBooking.children} Children
                   </p>
                 </div>
-              </div>
-
-              {selectedBooking.specialRequests && (
-                <div className="mt-6 bg-[var(--rice-white)] p-6 rounded-lg">
-                  <p className="flex items-center gap-2 mb-2">
-                    <i className="bi bi-chat-left-text text-[var(--river-blue)]"></i>
-                    <strong>Special Requests:</strong>
-                  </p>
-                  <p className="text-[var(--mountain-slate)] pl-6">{selectedBooking.specialRequests}</p>
-                </div>
-              )}
-
-              <div className="mt-6 flex justify-end">
-                <button
-                  onClick={() => setSelectedBooking(null)}
-                  className="btn-primary py-2 px-6 flex items-center gap-2"
-                >
-                  <i className="bi bi-x-circle"></i> Close
-                </button>
+                {selectedBooking.specialRequests && (
+                  <div className="col-span-2">
+                    <p className="flex items-start gap-2">
+                      <i className="bi bi-chat-text text-[var(--river-blue)] mt-1"></i>
+                      <span>
+                        <strong>Special Requests:</strong><br />
+                        {selectedBooking.specialRequests}
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
