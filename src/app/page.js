@@ -5,7 +5,7 @@ import FeatureCard from '@/components/FeatureCard';
 import VideoSection from '@/components/VideoSection';
 import StatsSection from '@/components/StatsSection';
 import Testimonials from '@/components/Testimonials';
-import UserNav from '../components/UserNav';
+import UserNav from '../components/userNav';
 
 
 const features = [
